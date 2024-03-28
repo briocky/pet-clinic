@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: pet-clinic
+  jpa:
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/pet-clinic
+
+app:
+  token:
+    shortTokenExpirationLength: 60
+    refreshTokenExpirationLength: 1440
+    tokenSecretKey: eyJhbGciOiJIUzUxMiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY5NzM2MjE3MCwiaWF0IjoxNjk3MzYyMTcwfQ.f_78jb1fINTUzW-am-NHrtqUCRp1u5rPd_Ov0V8fGsf8pZVBM4Bic_ByEfuxDZl9Mg-R3t7iZW7gSYO4OTlpew
+
