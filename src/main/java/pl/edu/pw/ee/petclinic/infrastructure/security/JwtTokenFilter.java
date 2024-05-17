@@ -7,21 +7,21 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import pl.edu.pw.ee.petclinic.domain.user.entity.AuthData;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class JwtTokenFilter extends OncePerRequestFilter {
 
-  private static final String JWT_TOKEN_HEADER = "Authorization";
-  private static final String JWT_TOKEN_PREFIX = "Bearer ";
+  private static final String BEARER = "Bearer ";
   private final static String REFRESH_TOKEN_ENDPOINT = "/api/refresh-token";
 
   private final JwtGenerator jwtGenerator;
@@ -52,17 +52,17 @@ public class JwtTokenFilter extends OncePerRequestFilter {
   }
 
   private void attemptAuthenticateUser(String token, String userEmail, HttpServletRequest request) {
-    final UserDetails userDetails = userDetailsService.loadUserByUsername(
+    final AuthData authData = (AuthData) userDetailsService.loadUserByUsername(
         userEmail
     );
 
     final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-        userDetails,
+        authData,
         null,
-        userDetails.getAuthorities()
+        authData.getAuthorities()
     );
 
-    jwtGenerator.validateToken(token, userDetails);
+    jwtGenerator.validateToken(token, authData);
 
     authentication.setDetails(
         new WebAuthenticationDetailsSource().buildDetails(request)
@@ -74,12 +74,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
   }
 
   private String extractJwtFromRequest(HttpServletRequest request) {
-    final String userToken = request.getHeader(JWT_TOKEN_HEADER);
+    final String userToken = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-    if (userToken == null || !userToken.startsWith(JWT_TOKEN_PREFIX)) {
+    if (userToken == null || !userToken.startsWith(BEARER)) {
       return null;
     }
 
-    return userToken.replace(JWT_TOKEN_PREFIX, "");
+    return userToken.replace(BEARER, "");
   }
 }
