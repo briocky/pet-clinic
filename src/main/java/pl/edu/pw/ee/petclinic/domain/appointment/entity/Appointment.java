@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
@@ -15,6 +16,7 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import pl.edu.pw.ee.petclinic.domain.doctor.entity.Doctor;
 import pl.edu.pw.ee.petclinic.domain.invoice.entity.Invoice;
+import pl.edu.pw.ee.petclinic.domain.owner.entity.Owner;
 import pl.edu.pw.ee.petclinic.domain.patient.entity.Patient;
 
 @Entity
@@ -24,12 +26,19 @@ import pl.edu.pw.ee.petclinic.domain.patient.entity.Patient;
 public class Appointment {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(
+      strategy = GenerationType.SEQUENCE,
+      generator = "appointments_seq"
+  )
+  @SequenceGenerator(name = "appointments_seq", allocationSize = 1)
   Long id;
   LocalDateTime dateTime;
   @ManyToOne
   @JoinColumn(name = "patient_id", referencedColumnName = "id")
   Patient patient;
+  @ManyToOne
+  @JoinColumn(name = "owner_id", referencedColumnName = "id")
+  Owner owner;
   @ManyToOne
   @JoinColumn(name = "doctor_id", referencedColumnName = "id")
   Doctor doctor;

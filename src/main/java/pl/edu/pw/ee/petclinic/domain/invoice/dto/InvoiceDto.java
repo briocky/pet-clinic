@@ -1,6 +1,6 @@
-package pl.edu.pw.ee.petclinic.domain.patient.dto;
+package pl.edu.pw.ee.petclinic.domain.invoice.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import pl.edu.pw.ee.petclinic.domain.patient.enums.Species;
 
 @AllArgsConstructor
 @Getter
@@ -16,9 +15,10 @@ import pl.edu.pw.ee.petclinic.domain.patient.enums.Species;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PatientRegistrationDto {
-  String name;
-  Species species;
-  String breed;
-  LocalDate birthDate;
+public class InvoiceDto {
+  Long id;
+  double price;
+  String description;
+  LocalDateTime issuedAt;
+  boolean isPaid;
 }

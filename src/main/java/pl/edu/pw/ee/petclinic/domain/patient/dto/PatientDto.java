@@ -16,9 +16,10 @@ import pl.edu.pw.ee.petclinic.domain.patient.enums.Species;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PatientRegistrationDto {
+public class PatientDto {
+  Long id;
   String name;
   Species species;
-  String breed;
+  Enum<?> breed;
   LocalDate birthDate;
 }

@@ -1,10 +1,9 @@
-package pl.edu.pw.ee.petclinic.domain.appointment.dto;
+package pl.edu.pw.ee.petclinic.domain.owner.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -52,7 +51,7 @@ public class RegistrationRequest {
   String phoneNumber;
 
   @NotNull
-  LocalDateTime birthDate;
+  LocalDate birthDate;
 
   List<PatientRegistrationDto> pets;
 }

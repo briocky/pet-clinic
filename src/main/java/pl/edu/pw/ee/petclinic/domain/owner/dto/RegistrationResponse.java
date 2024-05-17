@@ -1,6 +1,6 @@
-package pl.edu.pw.ee.petclinic.domain.patient.dto;
+package pl.edu.pw.ee.petclinic.domain.owner.dto;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import pl.edu.pw.ee.petclinic.domain.patient.enums.Species;
 
 @AllArgsConstructor
 @Getter
@@ -16,9 +15,11 @@ import pl.edu.pw.ee.petclinic.domain.patient.enums.Species;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PatientRegistrationDto {
+public class RegistrationResponse {
+  Long id;
+  String email;
   String name;
-  Species species;
-  String breed;
-  LocalDate birthDate;
+  String accessToken;
+  @JsonIgnore
+  String refreshToken;
 }
