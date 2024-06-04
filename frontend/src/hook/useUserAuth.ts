@@ -1,19 +1,21 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useRouter } from 'next/navigation';
-import { RootState } from '@/redux/store';
+"use client";
+
+import {useEffect} from 'react';
+import {useSelector} from 'react-redux';
+import {useRouter} from 'next/navigation';
+import {RootState} from "@/redux/store";
 
 const useUserAuth = () => {
-  const router = useRouter();
-  const { isLoggedIn, user } = useSelector((state: RootState) => state.auth);
+    const router = useRouter();
+    const {isLoggedIn, userDetails} = useSelector((state: RootState) => state.auth);
 
-  useEffect(() => {
-    if (!isLoggedIn || user?.role !== 'USER') {
-      router.push('/auth/login');
-    }
-  }, [isLoggedIn, user, router]);
+    useEffect(() => {
+        if (!isLoggedIn || userDetails?.systemRole != 'USER') {
+            router.push('/auth/login');
+        }
+    }, [router]);
 
-  return { isLoggedIn, user };
+    return {isLoggedIn, userDetails};
 };
 
 export default useUserAuth;

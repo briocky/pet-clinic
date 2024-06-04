@@ -37,6 +37,7 @@ public class Patient {
   @SequenceGenerator(name = "patients_seq", allocationSize = 1)
   Long id;
   String name;
+  @Enumerated(EnumType.STRING)
   Species species;
   @Enumerated(EnumType.STRING)
   Breed breed;

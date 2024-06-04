@@ -1,5 +1,6 @@
 enum SystemRole {
-  USER = 'USER', DOCTOR = 'DOCTOR'
+  USER = 'USER',
+  DOCTOR = 'DOCTOR'
 }
 
 export {SystemRole}

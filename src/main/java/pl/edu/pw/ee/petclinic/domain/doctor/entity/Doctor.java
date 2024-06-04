@@ -13,10 +13,11 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.proxy.HibernateProxy;
 import pl.edu.pw.ee.petclinic.domain.appointment.entity.Appointment;
 import pl.edu.pw.ee.petclinic.domain.doctor.enums.Specialization;
 import pl.edu.pw.ee.petclinic.domain.user.entity.AuthData;
@@ -24,10 +25,15 @@ import pl.edu.pw.ee.petclinic.domain.user.entity.SystemUser;
 import pl.edu.pw.ee.petclinic.domain.user.entity.UserDetails;
 import pl.edu.pw.ee.petclinic.domain.user.enums.SystemRole;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
 @Entity
 @Table(name = "doctors")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Data
+@Getter
+@Setter
 public class Doctor implements SystemUser {
 
   @Id
@@ -47,9 +53,38 @@ public class Doctor implements SystemUser {
   Specialization specialization;
   @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
   Set<Appointment> appointments;
+  @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
+  List<AppointmentSlot> appointmentsSlots;
 
   @Override
   public SystemRole getSystemRole() {
     return SystemRole.DOCTOR;
+  }
+
+  @Override
+  public final boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null) {
+      return false;
+    }
+    Class<?> oEffectiveClass = o instanceof HibernateProxy
+        ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass()
+        : o.getClass();
+    Class<?> thisEffectiveClass = this instanceof HibernateProxy
+        ? ((HibernateProxy) this).getHibernateLazyInitializer()
+        .getPersistentClass() : this.getClass();
+    if (thisEffectiveClass != oEffectiveClass) {
+      return false;
+    }
+    Doctor doctor = (Doctor) o;
+    return getId() != null && Objects.equals(getId(), doctor.getId());
+  }
+
+  @Override
+  public final int hashCode() {
+    return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer()
+        .getPersistentClass().hashCode() : getClass().hashCode();
   }
 }

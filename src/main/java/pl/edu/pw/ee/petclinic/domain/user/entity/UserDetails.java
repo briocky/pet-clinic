@@ -8,11 +8,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import pl.edu.pw.ee.petclinic.domain.user.enums.SystemRole;
+
+import java.time.LocalDate;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -32,7 +33,7 @@ public class UserDetails {
   String email;
   String phoneNumber;
   String address;
-  LocalDateTime birthDate;
+  LocalDate birthDate;
   String imageUrl;
   @Enumerated(EnumType.STRING)
   SystemRole systemRole;

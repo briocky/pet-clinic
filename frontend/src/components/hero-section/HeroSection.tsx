@@ -16,7 +16,7 @@ const HeroSection: React.FC<Props> = () => {
           </div>
           <div>
             <button className="bg-yellow-500 text-sm font-medium py-2 px-4 rounded-3xl">
-              <Link href={'/appointment/new'}> Book Now </Link>
+              <Link href={'/user/appointment/new'}> Book Now </Link>
             </button>
           </div>
         </div>

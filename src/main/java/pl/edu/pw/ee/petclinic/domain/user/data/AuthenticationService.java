@@ -32,6 +32,11 @@ public class AuthenticationService {
 
     UserDetails userDetailsByEmail = userDetailsService.getUserDetailsByEmail(request.getEmail());
     return LoginResponse.builder()
+        .id(userDetailsByEmail.getId())
+        .birthDate(userDetailsByEmail.getBirthDate())
+        .address(userDetailsByEmail.getAddress())
+        .imageUrl(userDetailsByEmail.getImageUrl())
+        .phoneNumber(userDetailsByEmail.getPhoneNumber())
         .email(authDataByEmail.getEmail())
         .systemRole(userDetailsByEmail.getSystemRole())
         .name(userDetailsByEmail.getName())

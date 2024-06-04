@@ -10,6 +10,8 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import pl.edu.pw.ee.petclinic.domain.user.enums.SystemRole;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -17,10 +19,15 @@ import pl.edu.pw.ee.petclinic.domain.user.enums.SystemRole;
 @Builder(toBuilder = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LoginResponse {
+  Long id;
   String email;
   String name;
   SystemRole systemRole;
   String accessToken;
+  String address;
+  LocalDate birthDate;
+  String imageUrl;
+  String phoneNumber;
   @JsonIgnore
   String refreshToken;
 }

@@ -19,5 +19,28 @@ VALUES
 -- Dodawanie danych do Owner
 INSERT INTO owners (id, user_details_id, auth_data_id)
 VALUES
-    (nextval('owners_seq'), 1, 1),
-    (nextval('owners_seq'), 2, 2);
+    (nextval('owners_seq'), 1, 1);
+
+INSERT INTO doctors (id, user_details_id, auth_data_id, specialization)
+VALUES
+    (nextval('doctors_seq'), 2, 2, 'SURGERY');
+
+INSERT INTO appointments_slots (id, date, time_from, time_to, doctor_id)
+VALUES
+    (nextval('appointments_slots_seq'), '2024-05-27', '10:30', '11:00', 1),
+    (nextval('appointments_slots_seq'), '2024-05-27', '11:30', '12:00', 1),
+    (nextval('appointments_slots_seq'), '2024-05-27', '12:30', '13:00', 1),
+    (nextval('appointments_slots_seq'), '2024-05-27', '13:30', '14:00', 1),
+    (nextval('appointments_slots_seq'), '2024-05-28', '10:30', '11:00', 1),
+    (nextval('appointments_slots_seq'), '2024-05-28', '11:30', '12:00', 1),
+    (nextval('appointments_slots_seq'), '2024-05-28', '12:30', '13:00', 1),
+    (nextval('appointments_slots_seq'), '2024-05-28', '13:30', '14:00', 1);
+
+INSERT INTO patients (id, owner_id, breed, name, species, birth_date)
+VALUES
+    (nextval('patients_seq'), 1, 'PARROT', 'Jelly', 'BIRD', '2022-01-01'),
+    (nextval('patients_seq'), 1, 'PERSIAN', 'Casper', 'CAT', '2023-02-01'),
+    (nextval('patients_seq'), 1, 'LABRADOR', 'Hanny', 'DOG', '2024-01-21'),
+    (nextval('patients_seq'), 1, 'HOLSTEIN', 'Marry', 'COW', '2021-02-01'),
+    (nextval('patients_seq'), 1, 'BETTA', 'Boll', 'FISH', '2022-03-04'),
+    (nextval('patients_seq'), 1, 'THOROUGHBRED', 'Jody', 'HORSE', '2022-06-07');

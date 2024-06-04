@@ -1,27 +1,30 @@
-import {AuthState} from "@/entities/auth/AuthState";
+import {AuthorizationData} from "@/entities/auth/Auth.types";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {User} from "@/entities/user/User";
+import {UserDetails} from "@/entities/user/UserDetails";
 
-const initialState: AuthState = {
-  isLoggedIn: false,
-  user: null,
+const initialState: AuthorizationData = {
+    userDetails: null,
+    isLoggedIn: false,
 };
 
 const authSlice = createSlice({
-  name: 'auth',
-  initialState,
-  reducers: {
-    login: (state, action: PayloadAction<User>) => {
-      state.isLoggedIn = true;
-      state.user = action.payload;
+    name: 'auth',
+    initialState,
+    reducers: {
+        login: (state, action: PayloadAction<UserDetails>) => {
+            return {
+                ...state,
+                isLoggedIn: true,
+                userDetails: action.payload
+            };
+        },
+        logout: (state) => {
+            state.isLoggedIn = false;
+            state.userDetails = null;
+        },
     },
-    logout: (state) => {
-      state.isLoggedIn = false;
-      state.user = null;
-    },
-  },
 });
 
-export const { login, logout } = authSlice.actions;
+export const {login, logout} = authSlice.actions;
 
 export default authSlice.reducer;
