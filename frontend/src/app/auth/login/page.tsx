@@ -53,7 +53,7 @@ export default function Login() {
                 router.replace('/user/appointment/all');
                 return;
             }
-            router.replace('doctor/appointment/all');
+            router.replace('/doctor/appointment/all');
         })
     }
 

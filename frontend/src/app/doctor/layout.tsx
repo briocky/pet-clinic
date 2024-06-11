@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import Navbar from "@/components/navbar/Navbar";
+import DoctorNavbar from "@/components/navbar/DoctorNavbar";
 
 export default function AppointmentLayout(
     {children}: Readonly<{ children: React.ReactNode; }>
 ) {
     return (
         <>
-            <Navbar/>
+            <DoctorNavbar/>
             {children}
         </>
     );
